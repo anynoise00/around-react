@@ -22,6 +22,12 @@ function App() {
     setIsEditProfilePopupOpen(true);
   }
 
+  function closeAllPopups() {
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+  }
+
   return (
     <div className='page'>
       <Header />
@@ -37,6 +43,7 @@ function App() {
         title='Novo local'
         name='add-place'
         isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
       >
         <div className='form__input-area'>
           <input
@@ -68,6 +75,7 @@ function App() {
         title='Alterar a foto de perfil'
         name='edit-avatar'
         isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
       >
         <div className='form__input-area'>
           <input
@@ -86,6 +94,7 @@ function App() {
         title='Editar perfil'
         name='edit-profile'
         isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
       >
         <div className='form__input-area'>
           <input

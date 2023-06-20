@@ -9,6 +9,28 @@ function App() {
       <Main />
       <Footer />
 
+      <div id='popup-edit-avatar' className='popup'>
+        <form className='form form_type_edit-avatar' noValidate>
+          <button type='button' className='button popup__button-close' />
+          <h2 className='form__header'>Alterar a foto de perfil</h2>
+          <div className='form__input-area'>
+            <input
+              type='url'
+              name='link'
+              id='avatar-link-input'
+              className='form__field'
+              placeholder='Link da imagem'
+              required
+            />
+            <span className='form__input-error avatar-link-input-error' />
+          </div>
+          <button type='submit' className='form__button-submit'>
+            Salvar
+          </button>
+        </form>
+        <div className='popup__overlay' />
+      </div>
+
       <div id='popup-edit-profile' className='popup'>
         <form className='form form_type_edit-profile' noValidate>
           <button type='button' className='button popup__button-close' />
@@ -79,28 +101,6 @@ function App() {
           </div>
           <button type='submit' className='form__button-submit'>
             Criar
-          </button>
-        </form>
-        <div className='popup__overlay' />
-      </div>
-
-      <div id='popup-edit-avatar' className='popup'>
-        <form className='form form_type_edit-avatar' noValidate>
-          <button type='button' className='button popup__button-close' />
-          <h2 className='form__header'>Alterar a foto de perfil</h2>
-          <div className='form__input-area'>
-            <input
-              type='url'
-              name='link'
-              id='avatar-link-input'
-              className='form__field'
-              placeholder='Link da imagem'
-              required
-            />
-            <span className='form__input-error avatar-link-input-error' />
-          </div>
-          <button type='submit' className='form__button-submit'>
-            Salvar
           </button>
         </form>
         <div className='popup__overlay' />

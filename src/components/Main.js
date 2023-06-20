@@ -10,19 +10,42 @@ function Main() {
             alt='Avatar do Usuário'
             className='profile__avatar'
           />
-          <div className='profile__avatar-overlay' />
+          <div
+            className='profile__avatar-overlay'
+            onClick={handleEditAvatarClick}
+          />
         </div>
         <div className='profile__info'>
           <h2 className='profile__name'>Lorem Ipsum</h2>
           <p className='profile__description'>Dolor, Sit & Amet</p>
-          <button type='button' className='button profile__button-edit' />
+          <button
+            type='button'
+            className='button profile__button-edit'
+            onClick={handleEditProfileClick}
+          />
         </div>
-        <button type='button' className='button profile__button-add' />
+        <button
+          type='button'
+          className='button profile__button-add'
+          onClick={handleAddPlaceClick}
+        />
       </section>
 
       <ul className='cards' />
     </main>
   );
+}
+
+function handleEditAvatarClick() {
+  document.querySelector('.popup_type_').classList.add('popup_visible');
+}
+
+function handleEditProfileClick() {
+  document.querySelector('.popup_type_').classList.add('popup_visible');
+}
+
+function handleAddPlaceClick() {
+  document.querySelector('.popup_type_').classList.add('popup_visible');
 }
 
 export default Main;

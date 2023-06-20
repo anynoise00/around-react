@@ -11,7 +11,7 @@ function App() {
 
       <div id='popup-edit-profile' className='popup'>
         <form className='form form_type_edit-profile' noValidate>
-          <button type='button' className='button popup__button-close'></button>
+          <button type='button' className='button popup__button-close' />
           <h2 className='form__header'>Editar perfil</h2>
           <div className='form__input-area'>
             <input
@@ -24,7 +24,7 @@ function App() {
               maxLength='40'
               required
             />
-            <span className='form__input-error profile-name-input-error'></span>
+            <span className='form__input-error profile-name-input-error' />
           </div>
           <div className='form__input-area'>
             <input
@@ -37,7 +37,7 @@ function App() {
               maxLength='200'
               required
             />
-            <span className='form__input-error profile-description-input-error'></span>
+            <span className='form__input-error profile-description-input-error' />
           </div>
           <button
             type='submit'
@@ -46,12 +46,12 @@ function App() {
             Salvar
           </button>
         </form>
-        <div className='popup__overlay'></div>
+        <div className='popup__overlay' />
       </div>
 
       <div id='popup-add-image' className='popup'>
         <form className='form form_type_add-image' noValidate>
-          <button type='button' className='button popup__button-close'></button>
+          <button type='button' className='button popup__button-close' />
           <h2 className='form__header'>Novo local</h2>
           <div className='form__input-area'>
             <input
@@ -64,7 +64,7 @@ function App() {
               maxLength='30'
               required
             />
-            <span className='form__input-error image-title-input-error'></span>
+            <span className='form__input-error image-title-input-error' />
           </div>
           <div className='form__input-area'>
             <input
@@ -75,18 +75,18 @@ function App() {
               placeholder='Link da imagem'
               required
             />
-            <span className='form__input-error image-link-input-error'></span>
+            <span className='form__input-error image-link-input-error' />
           </div>
           <button type='submit' className='form__button-submit'>
             Criar
           </button>
         </form>
-        <div className='popup__overlay'></div>
+        <div className='popup__overlay' />
       </div>
 
       <div id='popup-edit-avatar' className='popup'>
         <form className='form form_type_edit-avatar' noValidate>
-          <button type='button' className='button popup__button-close'></button>
+          <button type='button' className='button popup__button-close' />
           <h2 className='form__header'>Alterar a foto de perfil</h2>
           <div className='form__input-area'>
             <input
@@ -97,18 +97,18 @@ function App() {
               placeholder='Link da imagem'
               required
             />
-            <span className='form__input-error avatar-link-input-error'></span>
+            <span className='form__input-error avatar-link-input-error' />
           </div>
           <button type='submit' className='form__button-submit'>
             Salvar
           </button>
         </form>
-        <div className='popup__overlay'></div>
+        <div className='popup__overlay' />
       </div>
 
       <div id='popup-confirmation' className='popup'>
         <form className='form form_type_add-image' noValidate>
-          <button type='button' className='button popup__button-close'></button>
+          <button type='button' className='button popup__button-close' />
           <h2 className='form__header'>Tem certeza?</h2>
           <button
             type='submit'
@@ -117,12 +117,12 @@ function App() {
             Sim
           </button>
         </form>
-        <div className='popup__overlay'></div>
+        <div className='popup__overlay' />
       </div>
 
       <div id='popup-image-view' className='popup'>
         <div className='image-popup'>
-          <button type='button' className='button popup__button-close'></button>
+          <button type='button' className='button popup__button-close' />
           <img
             src=''
             alt='Imagem ampliada para melhor visualização da paisagem'
@@ -131,18 +131,18 @@ function App() {
           <h2 className='image-popup__title'>Imagem Qualquer</h2>
         </div>
 
-        <div className='popup__overlay'></div>
+        <div className='popup__overlay' />
       </div>
 
       <template id='card-template'>
         <li className='card'>
-          <button type='button' className='button card__button-delete'></button>
+          <button type='button' className='button card__button-delete' />
           <button type='button' className='card__button-view-image'>
             <img alt='--' className='card__image' />
           </button>
           <div className='card__info-container'>
-            <h2 className='card__title'></h2>
-            <button type='button' className='button card__button-like'></button>
+            <h2 className='card__title'>Card Title</h2>
+            <button type='button' className='button card__button-like' />
             <p className='card__like-counter'>0</p>
           </div>
         </li>

@@ -37,15 +37,21 @@ function Main() {
 }
 
 function handleEditAvatarClick() {
-  document.querySelector('.popup_type_').classList.add('popup_visible');
+  document
+    .querySelector('.popup_type_edit-avatar')
+    .classList.add('popup_visible');
 }
 
 function handleEditProfileClick() {
-  document.querySelector('.popup_type_').classList.add('popup_visible');
+  document
+    .querySelector('.popup_type_edit-profile')
+    .classList.add('popup_visible');
 }
 
 function handleAddPlaceClick() {
-  document.querySelector('.popup_type_').classList.add('popup_visible');
+  document
+    .querySelector('.popup_type_add-place')
+    .classList.add('popup_visible');
 }
 
 export default Main;

@@ -1,16 +1,74 @@
+import { useState } from 'react';
+
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 
 function App() {
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+
   return (
     <div className='page'>
       <Header />
-      <Main />
+      <Main
+        onAddPlaceClick={handleAddPlaceClick}
+        onEditAvatarClick={handleEditAvatarClick}
+        onEditProfileClick={handleEditProfileClick}
+        onCardClick={''}
+      />
       <Footer />
 
-      <PopupWithForm title='Alterar a foto de perfil' name='edit-avatar'>
+      <PopupWithForm
+        title='Novo local'
+        name='add-place'
+        isOpen={isAddPlacePopupOpen}
+      >
+        <div className='form__input-area'>
+          <input
+            type='text'
+            name='title'
+            id='image-title-input'
+            className='form__field'
+            placeholder='Título'
+            minLength='2'
+            maxLength='30'
+            required
+          />
+          <span className='form__input-error image-title-input-error' />
+        </div>
+        <div className='form__input-area'>
+          <input
+            type='url'
+            name='link'
+            id='image-link-input'
+            className='form__field'
+            placeholder='Link da imagem'
+            required
+          />
+          <span className='form__input-error image-link-input-error' />
+        </div>
+      </PopupWithForm>
+
+      <PopupWithForm
+        title='Alterar a foto de perfil'
+        name='edit-avatar'
+        isOpen={isEditAvatarPopupOpen}
+      >
         <div className='form__input-area'>
           <input
             type='url'
@@ -24,7 +82,11 @@ function App() {
         </div>
       </PopupWithForm>
 
-      <PopupWithForm title='Editar perfil' name='edit-profile'>
+      <PopupWithForm
+        title='Editar perfil'
+        name='edit-profile'
+        isOpen={isEditProfilePopupOpen}
+      >
         <div className='form__input-area'>
           <input
             type='text'
@@ -50,33 +112,6 @@ function App() {
             required
           />
           <span className='form__input-error profile-description-input-error' />
-        </div>
-      </PopupWithForm>
-
-      <PopupWithForm title='Novo local' name='add-place'>
-        <div className='form__input-area'>
-          <input
-            type='text'
-            name='title'
-            id='image-title-input'
-            className='form__field'
-            placeholder='Título'
-            minLength='2'
-            maxLength='30'
-            required
-          />
-          <span className='form__input-error image-title-input-error' />
-        </div>
-        <div className='form__input-area'>
-          <input
-            type='url'
-            name='link'
-            id='image-link-input'
-            className='form__field'
-            placeholder='Link da imagem'
-            required
-          />
-          <span className='form__input-error image-link-input-error' />
         </div>
       </PopupWithForm>
 

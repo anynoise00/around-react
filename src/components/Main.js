@@ -1,6 +1,6 @@
 import avatar from '../images/profile_avatar.jpg';
 
-function Main() {
+function Main(props) {
   return (
     <main className='content'>
       <section className='profile'>
@@ -12,7 +12,7 @@ function Main() {
           />
           <div
             className='profile__avatar-overlay'
-            onClick={handleEditAvatarClick}
+            onClick={props.onEditAvatarClick}
           />
         </div>
         <div className='profile__info'>
@@ -21,37 +21,19 @@ function Main() {
           <button
             type='button'
             className='button profile__button-edit'
-            onClick={handleEditProfileClick}
+            onClick={props.onEditProfileClick}
           />
         </div>
         <button
           type='button'
           className='button profile__button-add'
-          onClick={handleAddPlaceClick}
+          onClick={props.onAddPlaceClick}
         />
       </section>
 
       <ul className='cards' />
     </main>
   );
-}
-
-function handleEditAvatarClick() {
-  document
-    .querySelector('.popup_type_edit-avatar')
-    .classList.add('popup_visible');
-}
-
-function handleEditProfileClick() {
-  document
-    .querySelector('.popup_type_edit-profile')
-    .classList.add('popup_visible');
-}
-
-function handleAddPlaceClick() {
-  document
-    .querySelector('.popup_type_add-place')
-    .classList.add('popup_visible');
 }
 
 export default Main;

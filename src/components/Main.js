@@ -34,11 +34,9 @@ function Main(props) {
           />
         </div>
         <div className='profile__info'>
-          <h2 className='profile__name'>
-            {userName ? userName : 'Lorem Ipsum'}
-          </h2>
+          <h2 className='profile__name'>{userName || 'Lorem Ipsum'}</h2>
           <p className='profile__description'>
-            {userDescription ? userDescription : 'Dolor, Sit & Amet'}
+            {userDescription || 'Dolor, Sit & Amet'}
           </p>
           <button
             type='button'

@@ -1,3 +1,5 @@
+import React from 'react';
+
 function Card(props) {
   function handleClick() {
     props.onCardClick(props.card);

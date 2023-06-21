@@ -3,6 +3,7 @@ import Card from './Card';
 import api from '../utils/api';
 
 function Main(props) {
+  const [userId, setUserId] = useState('');
   const [userName, setUserName] = useState('');
   const [userDescription, setUserDescription] = useState('');
   const [userAvatar, setUserAvatar] = useState('');
@@ -10,6 +11,7 @@ function Main(props) {
 
   useEffect(() => {
     api.getUserData().then((res) => {
+      setUserId(res._id);
       setUserName(res.name);
       setUserDescription(res.about);
       setUserAvatar(res.avatar);
@@ -19,6 +21,20 @@ function Main(props) {
       setCards(res);
     });
   }, []);
+
+  function handleCardLikeClick(card, isLiked) {
+    const promise = isLiked
+      ? api.dislikeCard(card._id)
+      : api.likeCard(card._id);
+    promise.then((res) => {
+      setCards(
+        cards.map((c) => {
+          const equal = c._id === res._id;
+          return equal ? res : c;
+        })
+      );
+    });
+  }
 
   return (
     <main className='content'>
@@ -56,7 +72,10 @@ function Main(props) {
           <Card
             card={c}
             key={`card-${c._id}`}
+            isLiked={c.likes.some((user) => user._id === userId)}
+            isOwner={c.owner._id === userId}
             onCardClick={props.onCardClick}
+            onLikeClick={handleCardLikeClick}
           />
         ))}
       </ul>

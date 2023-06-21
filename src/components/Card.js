@@ -1,10 +1,15 @@
 function Card(props) {
+  function handleClick() {
+    props.onCardClick(props.card);
+  }
+
   return (
     <li className='card' key={props.card._id}>
       <button type='button' className='button card__button-delete' />
       <div
         className='card__image'
         style={{ backgroundImage: `url(${props.card.link})` }}
+        onClick={handleClick}
       />
       <div className='card__info-container'>
         <h2 className='card__title'>{props.card.name}</h2>

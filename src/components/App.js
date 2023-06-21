@@ -4,11 +4,14 @@ import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 
 function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isConfirmationPopupOpen, setIsConfirmationPopupOpen] = useState(false);
+  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
@@ -22,10 +25,16 @@ function App() {
     setIsEditProfilePopupOpen(true);
   }
 
+  function handleCardClick() {
+    setIsImagePopupOpen(true);
+  }
+
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
+    setIsConfirmationPopupOpen(false);
+    setIsImagePopupOpen(false);
   }
 
   return (
@@ -124,49 +133,14 @@ function App() {
         </div>
       </PopupWithForm>
 
-      <PopupWithForm title='Tem certeza?' name='confirmation' />
+      <PopupWithForm
+        title='Tem certeza?'
+        name='confirmation'
+        isOpen={isConfirmationPopupOpen}
+        onClose={closeAllPopups}
+      />
 
-      {/* <div id='popup-confirmation' className='popup'>
-        <form className='form form_type_add-image' noValidate>
-          <button type='button' className='button popup__button-close' />
-          <h2 className='form__header'>Tem certeza?</h2>
-          <button
-            type='submit'
-            className='form__button-submit popup__button-confirm'
-          >
-            Sim
-          </button>
-        </form>
-        <div className='popup__overlay' />
-      </div> */}
-
-      <div id='popup-image-view' className='popup'>
-        <div className='image-popup'>
-          <button type='button' className='button popup__button-close' />
-          <img
-            src=''
-            alt='Imagem ampliada para melhor visualização da paisagem'
-            className='image-popup__image'
-          />
-          <h2 className='image-popup__title'>Imagem Qualquer</h2>
-        </div>
-
-        <div className='popup__overlay' />
-      </div>
-
-      <template id='card-template'>
-        <li className='card'>
-          <button type='button' className='button card__button-delete' />
-          <button type='button' className='card__button-view-image'>
-            <img alt='--' className='card__image' />
-          </button>
-          <div className='card__info-container'>
-            <h2 className='card__title'>Card Title</h2>
-            <button type='button' className='button card__button-like' />
-            <p className='card__like-counter'>0</p>
-          </div>
-        </li>
-      </template>
+      <ImagePopup isOpen={isImagePopupOpen} onClose={closeAllPopups} />
     </div>
   );
 }

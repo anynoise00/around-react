@@ -5,6 +5,9 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import FormAddPlace from './FormAddPlace';
+import FormEditAvatar from './FormEditAvatar';
+import FormEditProfile from './FormEditProfile';
 
 function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -56,30 +59,7 @@ function App() {
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
       >
-        <div className='form__input-area'>
-          <input
-            type='text'
-            name='title'
-            id='image-title-input'
-            className='form__field'
-            placeholder='Título'
-            minLength='2'
-            maxLength='30'
-            required
-          />
-          <span className='form__input-error image-title-input-error' />
-        </div>
-        <div className='form__input-area'>
-          <input
-            type='url'
-            name='link'
-            id='image-link-input'
-            className='form__field'
-            placeholder='Link da imagem'
-            required
-          />
-          <span className='form__input-error image-link-input-error' />
-        </div>
+        <FormAddPlace />
       </PopupWithForm>
 
       <PopupWithForm
@@ -88,17 +68,7 @@ function App() {
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       >
-        <div className='form__input-area'>
-          <input
-            type='url'
-            name='link'
-            id='avatar-link-input'
-            className='form__field'
-            placeholder='Link da imagem'
-            required
-          />
-          <span className='form__input-error avatar-link-input-error' />
-        </div>
+        <FormEditAvatar />
       </PopupWithForm>
 
       <PopupWithForm
@@ -107,32 +77,7 @@ function App() {
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
       >
-        <div className='form__input-area'>
-          <input
-            type='text'
-            name='name'
-            id='profile-name-input'
-            className='form__field'
-            placeholder='Seu nome'
-            minLength='2'
-            maxLength='40'
-            required
-          />
-          <span className='form__input-error profile-name-input-error' />
-        </div>
-        <div className='form__input-area'>
-          <input
-            type='text'
-            name='about'
-            id='profile-description-input'
-            className='form__field'
-            placeholder='Uma breve descrição sobre você'
-            minLength='2'
-            maxLength='200'
-            required
-          />
-          <span className='form__input-error profile-description-input-error' />
-        </div>
+        <FormEditProfile />
       </PopupWithForm>
 
       <PopupWithForm
@@ -140,7 +85,11 @@ function App() {
         name='confirmation'
         isOpen={isConfirmationPopupOpen}
         onClose={closeAllPopups}
-      />
+      >
+        <button type='submit' className='form__button-submit'>
+          Sim
+        </button>
+      </PopupWithForm>
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </div>

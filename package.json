@@ -14,7 +14,11 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "@svgr/webpack": "^8.0.1"
+  },
+  "overrides": {
+    "@svgr/webpack": "$@svgr/webpack"
   },
   "scripts": {
     "start": "react-scripts start",

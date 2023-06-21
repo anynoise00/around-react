@@ -18,7 +18,7 @@ function Main(props) {
     <main className='content'>
       <section className='profile'>
         <div className='profile__avatar-container'>
-          <img
+          <div
             className='profile__avatar'
             style={{ backgroundImage: `url(${userAvatar})` }}
           />

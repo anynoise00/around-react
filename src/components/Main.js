@@ -1,14 +1,26 @@
-import avatar from '../images/profile_avatar.jpg';
+import api from '../utils/api';
+import { useState, useEffect } from 'react';
 
 function Main(props) {
+  const [userName, setUserName] = useState('');
+  const [userDescription, setUserDescription] = useState('');
+  const [userAvatar, setUserAvatar] = useState('');
+
+  useEffect(() => {
+    api.getUserData().then((data) => {
+      setUserName(data.name);
+      setUserDescription(data.about);
+      setUserAvatar(data.avatar);
+    });
+  });
+
   return (
     <main className='content'>
       <section className='profile'>
         <div className='profile__avatar-container'>
           <img
-            src={avatar}
-            alt='Avatar do Usuário'
             className='profile__avatar'
+            style={{ backgroundImage: `url(${userAvatar})` }}
           />
           <div
             className='profile__avatar-overlay'
@@ -16,8 +28,12 @@ function Main(props) {
           />
         </div>
         <div className='profile__info'>
-          <h2 className='profile__name'>Lorem Ipsum</h2>
-          <p className='profile__description'>Dolor, Sit & Amet</p>
+          <h2 className='profile__name'>
+            {userName ? userName : 'Lorem Ipsum'}
+          </h2>
+          <p className='profile__description'>
+            {userDescription ? userDescription : 'Dolor, Sit & Amet'}
+          </p>
           <button
             type='button'
             className='button profile__button-edit'

@@ -1,13 +1,3 @@
-const api = new Api({
-  baseUrl: `https://around.nomoreparties.co/v1/${groupId}`,
-  headers: {
-    authorization: token,
-    'Content-Type': 'application/json',
-  },
-});
-
-export default api;
-
 class Api {
   constructor({ baseUrl, headers }) {
     this._baseUrl = baseUrl;
@@ -87,3 +77,16 @@ function checkResponse(res) {
 
   return Promise.reject(`Error: ${res.status}`);
 }
+
+const groupId = 'web_ptbr_04';
+const token = '56988fc2-c072-4a64-b0a6-6eaae5ae8b3e';
+
+const api = new Api({
+  baseUrl: `https://around.nomoreparties.co/v1/${groupId}`,
+  headers: {
+    authorization: token,
+    'Content-Type': 'application/json',
+  },
+});
+
+export default api;

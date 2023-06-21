@@ -55,7 +55,11 @@ function Main(props) {
 
       <ul className='cards'>
         {cards.map((c) => (
-          <Card onCardClick={props.onCardClick} card={c} />
+          <Card
+            card={c}
+            key={`card-${c._id}`}
+            onCardClick={props.onCardClick}
+          />
         ))}
       </ul>
     </main>

@@ -6,7 +6,7 @@ function Card(props) {
   }
 
   return (
-    <li className='card' key={props.card._id}>
+    <li className='card'>
       <button type='button' className='button card__button-delete' />
       <div
         className='card__image'

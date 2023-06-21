@@ -22,15 +22,23 @@ function Main(props) {
     });
   }, []);
 
-  function handleCardLikeClick(card, isLiked) {
-    const promise = isLiked
-      ? api.dislikeCard(card._id)
-      : api.likeCard(card._id);
+  function handleCardLike(cardId, isLiked) {
+    const promise = isLiked ? api.dislikeCard(cardId) : api.likeCard(cardId);
     promise.then((res) => {
       setCards(
         cards.map((c) => {
           const equal = c._id === res._id;
           return equal ? res : c;
+        })
+      );
+    });
+  }
+
+  function handleCardDelete(cardId) {
+    api.deleteCard(cardId).then((res) => {
+      setCards(
+        cards.filter((c) => {
+          return !(c._id === cardId);
         })
       );
     });
@@ -75,7 +83,8 @@ function Main(props) {
             isLiked={c.likes.some((user) => user._id === userId)}
             isOwner={c.owner._id === userId}
             onCardClick={props.onCardClick}
-            onLikeClick={handleCardLikeClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
           />
         ))}
       </ul>

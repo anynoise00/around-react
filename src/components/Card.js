@@ -6,13 +6,21 @@ function Card(props) {
   }
 
   function handleLikeClick() {
-    props.onLikeClick(props.card, props.isLiked);
+    props.onCardLike(props.card._id, props.isLiked);
+  }
+
+  function handleDeleteClick() {
+    props.onCardDelete(props.card._id);
   }
 
   return (
     <li className='card'>
       {props.isOwner && (
-        <button type='button' className='button card__button-delete' />
+        <button
+          type='button'
+          className='button card__button-delete'
+          onClick={handleDeleteClick}
+        />
       )}
       <div
         className='card__image'

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
+import PopupWithForm from './PopupWithForm';
+import FormInputContainer from './FormInputContainer';
 import api from '../utils/api';
 
 function Main(props) {
@@ -42,6 +44,16 @@ function Main(props) {
         })
       );
     });
+  }
+
+  function handleFormAddPlaceSubmit(data) {
+    api.addCard(data).then((res) => setCards([res, ...cards]));
+  }
+  function handleFormEditAvatarSubmit(data) {
+    console.log(data);
+  }
+  function handleFormEditProfileSubmit(data) {
+    console.log(data);
   }
 
   return (
@@ -88,6 +100,89 @@ function Main(props) {
           />
         ))}
       </ul>
+
+      <PopupWithForm
+        title='Novo local'
+        name='add-place'
+        buttonText='Adicionar'
+        isOpen={props.isAddPlacePopupOpen}
+        onClose={props.closeAllPopups}
+        onSubmit={handleFormAddPlaceSubmit}
+      >
+        <FormInputContainer name='name'>
+          <input
+            type='text'
+            className='form__field'
+            placeholder='Título'
+            minLength='2'
+            maxLength='30'
+            required
+          />
+        </FormInputContainer>
+        <FormInputContainer name='link'>
+          <input
+            type='url'
+            className='form__field'
+            placeholder='Link da imagem'
+            required
+          />
+        </FormInputContainer>
+      </PopupWithForm>
+
+      <PopupWithForm
+        title='Alterar a foto de perfil'
+        name='edit-avatar'
+        buttonText='Salvar'
+        isOpen={props.isEditAvatarPopupOpen}
+        onClose={props.closeAllPopups}
+        onSubmit={handleFormEditAvatarSubmit}
+      >
+        <FormInputContainer name='link'>
+          <input
+            type='url'
+            className='form__field'
+            placeholder='Link da imagem'
+            required
+          />
+        </FormInputContainer>
+      </PopupWithForm>
+
+      <PopupWithForm
+        title='Editar perfil'
+        name='edit-profile'
+        buttonText='Salvar'
+        isOpen={props.isEditProfilePopupOpen}
+        onClose={props.closeAllPopups}
+        onSubmit={handleFormEditProfileSubmit}
+      >
+        <FormInputContainer name='name'>
+          <input
+            type='text'
+            className='form__field'
+            placeholder='Seu nome'
+            minLength='2'
+            maxLength='40'
+            required
+          />
+        </FormInputContainer>
+        <FormInputContainer name='about'>
+          <input
+            type='text'
+            className='form__field'
+            placeholder='Uma breve descrição sobre você'
+            minLength='2'
+            maxLength='200'
+            required
+          />
+        </FormInputContainer>
+      </PopupWithForm>
+
+      <PopupWithForm
+        title='Tem certeza?'
+        name='confirmation'
+        isOpen={props.isConfirmationPopupOpen}
+        onClose={props.closeAllPopups}
+      />
     </main>
   );
 }

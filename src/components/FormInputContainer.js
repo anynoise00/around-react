@@ -3,10 +3,10 @@ import React from 'react';
 function FormInputContainer(props) {
   return (
     <div className='form__input-area'>
-      {React.Children.map(props.children, (child) => {
-        return React.cloneElement(child, {
+      {React.Children.map(props.children, (c) => {
+        return React.cloneElement(c, {
           name: props.name,
-          value: props.onValueChange(props.name) || '',
+          value: props.getValue(props.name) || '',
           onChange: props.onChange,
         });
       })}

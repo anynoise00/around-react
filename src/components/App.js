@@ -40,9 +40,15 @@ function App() {
     setSelectedCard(undefined);
   }
 
-  function handleFormAddPlaceSubmit(data) {}
-  function handleFormEditAvatarSubmit(data) {}
-  function handleFormEditProfileSubmit(data) {}
+  function handleFormAddPlaceSubmit(data) {
+    console.log(data);
+  }
+  function handleFormEditAvatarSubmit(data) {
+    console.log(data);
+  }
+  function handleFormEditProfileSubmit(data) {
+    console.log(data);
+  }
 
   return (
     <div className='page'>

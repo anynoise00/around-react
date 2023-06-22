@@ -1,19 +1,36 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function PopupWithForm(props) {
   const [data, setData] = useState({});
 
   function handleChange(ev) {
-    const objData = { ...data };
-    const { name, value } = ev.target;
+    const target = ev.target;
+    setData({ ...data, [target.name]: target.value });
+  }
 
-    objData[name] = value;
-    setData(objData);
+  function handleSubmit(ev) {
+    ev.preventDefault();
+
+    for (const key in data) {
+      if (data[key] === '') return;
+    }
+
+    props.onSubmit(data);
   }
 
   function getValue(name) {
     return data[name];
   }
+
+  useEffect(() => {
+    const initialData = {};
+    React.Children.forEach(props.children, (c) => {
+      initialData[c.props.name] = '';
+    });
+
+    setData(initialData);
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div
@@ -24,15 +41,15 @@ function PopupWithForm(props) {
       <form
         className='form form_type_edit-avatar'
         name={props.name}
-        onSubmit={props.onSubmit}
+        onSubmit={handleSubmit}
         noValidate
       >
         <h2 className='form__header'>{props.title}</h2>
 
-        {React.Children.map(props.children, (child) => {
-          return React.cloneElement(child, {
+        {React.Children.map(props.children, (c) => {
+          return React.cloneElement(c, {
             onChange: (ev) => handleChange(ev),
-            onValueChange: getValue,
+            getValue,
           });
         })}
 

@@ -5,9 +5,7 @@ import Main from './Main';
 import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
-import FormAddPlace from './FormAddPlace';
-import FormEditAvatar from './FormEditAvatar';
-import FormEditProfile from './FormEditProfile';
+import FormInputContainer from './FormInputContainer';
 
 function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -42,6 +40,10 @@ function App() {
     setSelectedCard(undefined);
   }
 
+  function handleFormAddPlaceSubmit(data) {}
+  function handleFormEditAvatarSubmit(data) {}
+  function handleFormEditProfileSubmit(data) {}
+
   return (
     <div className='page'>
       <Header />
@@ -56,28 +58,77 @@ function App() {
       <PopupWithForm
         title='Novo local'
         name='add-place'
+        buttonText='Adicionar'
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
+        onSubmit={handleFormAddPlaceSubmit}
       >
-        <FormAddPlace />
+        <FormInputContainer name='title'>
+          <input
+            type='text'
+            className='form__field'
+            placeholder='Título'
+            minLength='2'
+            maxLength='30'
+            required
+          />
+        </FormInputContainer>
+        <FormInputContainer name='link'>
+          <input
+            type='url'
+            className='form__field'
+            placeholder='Link da imagem'
+            required
+          />
+        </FormInputContainer>
       </PopupWithForm>
 
       <PopupWithForm
         title='Alterar a foto de perfil'
         name='edit-avatar'
+        buttonText='Salvar'
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
+        onSubmit={handleFormEditAvatarSubmit}
       >
-        <FormEditAvatar />
+        <FormInputContainer name='link'>
+          <input
+            type='url'
+            className='form__field'
+            placeholder='Link da imagem'
+            required
+          />
+        </FormInputContainer>
       </PopupWithForm>
 
       <PopupWithForm
         title='Editar perfil'
         name='edit-profile'
+        buttonText='Salvar'
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
+        onSubmit={handleFormEditProfileSubmit}
       >
-        <FormEditProfile />
+        <FormInputContainer name='name'>
+          <input
+            type='text'
+            className='form__field'
+            placeholder='Seu nome'
+            minLength='2'
+            maxLength='40'
+            required
+          />
+        </FormInputContainer>
+        <FormInputContainer name='about'>
+          <input
+            type='text'
+            className='form__field'
+            placeholder='Uma breve descrição sobre você'
+            minLength='2'
+            maxLength='200'
+            required
+          />
+        </FormInputContainer>
       </PopupWithForm>
 
       <PopupWithForm
@@ -85,11 +136,7 @@ function App() {
         name='confirmation'
         isOpen={isConfirmationPopupOpen}
         onClose={closeAllPopups}
-      >
-        <button type='submit' className='form__button-submit'>
-          Sim
-        </button>
-      </PopupWithForm>
+      />
 
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </div>

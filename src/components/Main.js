@@ -49,11 +49,16 @@ function Main(props) {
   function handleFormAddPlaceSubmit(data) {
     api.addCard(data).then((res) => setCards([res, ...cards]));
   }
+
   function handleFormEditAvatarSubmit(data) {
     console.log(data);
   }
+
   function handleFormEditProfileSubmit(data) {
-    console.log(data);
+    api.updateUserData(data).then((res) => {
+      setUserName(res.name);
+      setUserDescription(res.about);
+    });
   }
 
   return (
@@ -137,7 +142,7 @@ function Main(props) {
         onClose={props.closeAllPopups}
         onSubmit={handleFormEditAvatarSubmit}
       >
-        <FormInputContainer name='link'>
+        <FormInputContainer name='avatar'>
           <input
             type='url'
             className='form__field'

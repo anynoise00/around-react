@@ -47,17 +47,24 @@ function Main(props) {
   }
 
   function handleFormAddPlaceSubmit(data) {
-    api.addCard(data).then((res) => setCards([res, ...cards]));
+    api.addCard(data).then((res) => {
+      setCards([res, ...cards]);
+      props.closeAllPopups();
+    });
   }
 
   function handleFormEditAvatarSubmit(data) {
-    console.log(data);
+    api.updateAvatar(data).then((res) => {
+      setUserAvatar(res.avatar);
+      props.closeAllPopups();
+    });
   }
 
   function handleFormEditProfileSubmit(data) {
     api.updateUserData(data).then((res) => {
       setUserName(res.name);
       setUserDescription(res.about);
+      props.closeAllPopups();
     });
   }
 

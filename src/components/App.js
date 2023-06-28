@@ -90,7 +90,6 @@ function App() {
 
   useEffect(() => {
     const escClose = (ev) => {
-      console.log(ev.key);
       if (ev.key === 'Escape') closeAllPopups();
     };
 

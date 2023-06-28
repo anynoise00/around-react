@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import AddPlacePopup from './AddPlacaPopup';
+import AddPlacePopup from './AddPlacePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import PopupWithForm from './PopupWithForm';
@@ -87,6 +87,19 @@ function App() {
     api.getUserInfo().then((info) => setCurrentUser(info));
     api.getInitialCards().then((cards) => setCards(cards));
   }, []);
+
+  useEffect(() => {
+    const escClose = (ev) => {
+      console.log(ev.key);
+      if (ev.key === 'Escape') closeAllPopups();
+    };
+
+    document.addEventListener('keydown', escClose);
+
+    return () => {
+      document.removeEventListener('keydown', escClose);
+    };
+  });
 
   return (
     <div className='page'>

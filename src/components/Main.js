@@ -43,13 +43,6 @@ function Main(props) {
     });
   }
 
-  function handleFormEditProfileSubmit(data) {
-    api.updateUserInfo(data).then((res) => {
-      // update user info
-      props.closeAllPopups();
-    });
-  }
-
   return (
     <main className='content'>
       <section className='profile'>
@@ -134,36 +127,6 @@ function Main(props) {
             type='url'
             className='form__field'
             placeholder='Link da imagem'
-            required
-          />
-        </FormInputContainer>
-      </PopupWithForm>
-
-      <PopupWithForm
-        title='Editar perfil'
-        name='edit-profile'
-        buttonText='Salvar'
-        isOpen={props.isEditProfilePopupOpen}
-        onClose={props.closeAllPopups}
-        onSubmit={handleFormEditProfileSubmit}
-      >
-        <FormInputContainer name='name'>
-          <input
-            type='text'
-            className='form__field'
-            placeholder='Seu nome'
-            minLength='2'
-            maxLength='40'
-            required
-          />
-        </FormInputContainer>
-        <FormInputContainer name='about'>
-          <input
-            type='text'
-            className='form__field'
-            placeholder='Uma breve descrição sobre você'
-            minLength='2'
-            maxLength='200'
             required
           />
         </FormInputContainer>

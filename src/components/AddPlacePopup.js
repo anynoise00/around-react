@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import FormInputContainer from './FormInputContainer';
 import PopupWithForm from './PopupWithForm';
 
@@ -18,6 +18,13 @@ function AddPlacePopup(props) {
     ev.preventDefault();
     props.onAddPlaceSubmit({ name, link });
   }
+
+  useEffect(() => {
+    if (!props.isOpen) return;
+
+    setName('');
+    setLink('');
+  }, [props.isOpen]);
 
   return (
     <PopupWithForm

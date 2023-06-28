@@ -16,25 +16,16 @@ function Main(props) {
     });
   }, []);
 
-  function handleCardLike(cardId, isLiked) {
-    const promise = isLiked ? api.dislikeCard(cardId) : api.likeCard(cardId);
-    promise.then((res) => {
-      setCards(
-        cards.map((c) => {
-          const equal = c._id === res._id;
-          return equal ? res : c;
-        })
-      );
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((user) => user._id === currentUser._id);
+    api.changeCardLikeStatus(card._id, !isLiked).then((newCard) => {
+      setCards(cards.map((c) => (c._id === newCard._id ? newCard : c)));
     });
   }
 
   function handleCardDelete(cardId) {
     api.deleteCard(cardId).then((res) => {
-      setCards(
-        cards.filter((c) => {
-          return !(c._id === cardId);
-        })
-      );
+      setCards(cards.filter((c) => !(c._id === cardId)));
     });
   }
 

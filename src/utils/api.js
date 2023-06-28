@@ -55,16 +55,9 @@ class Api {
     }).then(checkResponse);
   }
 
-  likeCard(cardId) {
+  changeCardLikeStatus(cardId, isLiked) {
     return fetch(this._baseUrl + '/cards/likes/' + cardId, {
-      method: 'PUT',
-      headers: this._headers,
-    }).then(checkResponse);
-  }
-
-  dislikeCard(cardId) {
-    return fetch(this._baseUrl + '/cards/likes/' + cardId, {
-      method: 'DELETE',
+      method: `${isLiked ? 'PUT' : 'DELETE'}`,
       headers: this._headers,
     }).then(checkResponse);
   }

@@ -20,7 +20,7 @@ function Card(props) {
   }
 
   function handleLikeClick() {
-    props.onCardLike(props.card._id, props.isLiked);
+    props.onCardLike(props.card);
   }
 
   return (

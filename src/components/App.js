@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
+import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
 import api from '../utils/api';
@@ -44,8 +46,11 @@ function App() {
     setSelectedCard(undefined);
   }
 
-  function handleChangeAvatar() {
-    //todo
+  function handleUpdateAvatar(avatar) {
+    api.setUserAvatar(avatar).then((info) => {
+      setCurrentUser(info);
+      closeAllPopups();
+    });
   }
 
   function handleUpdateUser(data) {
@@ -69,17 +74,29 @@ function App() {
           onEditProfileClick={handleEditProfileClick}
           onCardClick={handleCardClick}
           isAddPlacePopupOpen={isAddPlacePopupOpen}
-          isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-          isConfirmationPopupOpen={isConfirmationPopupOpen}
           closeAllPopups={closeAllPopups}
         />
         <Footer />
+
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
 
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         />
+
+        <PopupWithForm
+          title='Tem certeza?'
+          name='confirmation'
+          isOpen={isConfirmationPopupOpen}
+          onClose={closeAllPopups}
+        />
+
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </CurrentUserContext.Provider>
     </div>

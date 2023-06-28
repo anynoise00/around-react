@@ -36,13 +36,6 @@ function Main(props) {
     });
   }
 
-  function handleFormEditAvatarSubmit(data) {
-    api.updateAvatar(data).then((res) => {
-      // update user avatar
-      props.closeAllPopups();
-    });
-  }
-
   return (
     <main className='content'>
       <section className='profile'>
@@ -113,31 +106,6 @@ function Main(props) {
           />
         </FormInputContainer>
       </PopupWithForm>
-
-      <PopupWithForm
-        title='Alterar a foto de perfil'
-        name='edit-avatar'
-        buttonText='Salvar'
-        isOpen={props.isEditAvatarPopupOpen}
-        onClose={props.closeAllPopups}
-        onSubmit={handleFormEditAvatarSubmit}
-      >
-        <FormInputContainer name='avatar'>
-          <input
-            type='url'
-            className='form__field'
-            placeholder='Link da imagem'
-            required
-          />
-        </FormInputContainer>
-      </PopupWithForm>
-
-      <PopupWithForm
-        title='Tem certeza?'
-        name='confirmation'
-        isOpen={props.isConfirmationPopupOpen}
-        onClose={props.closeAllPopups}
-      />
     </main>
   );
 }

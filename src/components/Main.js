@@ -1,24 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Card from './Card';
 import PopupWithForm from './PopupWithForm';
 import FormInputContainer from './FormInputContainer';
 import api from '../utils/api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function Main(props) {
-  const [userId, setUserId] = useState('');
-  const [userName, setUserName] = useState('');
-  const [userDescription, setUserDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
   const [cards, setCards] = useState([]);
 
-  useEffect(() => {
-    api.getUserData().then((res) => {
-      setUserId(res._id);
-      setUserName(res.name);
-      setUserDescription(res.about);
-      setUserAvatar(res.avatar);
-    });
+  const currentUser = useContext(CurrentUserContext);
 
+  useEffect(() => {
     api.getInitialCards().then((res) => {
       setCards(res);
     });
@@ -55,15 +47,14 @@ function Main(props) {
 
   function handleFormEditAvatarSubmit(data) {
     api.updateAvatar(data).then((res) => {
-      setUserAvatar(res.avatar);
+      // update user avatar
       props.closeAllPopups();
     });
   }
 
   function handleFormEditProfileSubmit(data) {
-    api.updateUserData(data).then((res) => {
-      setUserName(res.name);
-      setUserDescription(res.about);
+    api.updateUserInfo(data).then((res) => {
+      // update user info
       props.closeAllPopups();
     });
   }
@@ -74,7 +65,7 @@ function Main(props) {
         <div className='profile__avatar-container'>
           <div
             className='profile__avatar'
-            style={{ backgroundImage: `url(${userAvatar})` }}
+            style={{ backgroundImage: `url(${currentUser.avatar})` }}
           />
           <div
             className='profile__avatar-overlay'
@@ -82,9 +73,9 @@ function Main(props) {
           />
         </div>
         <div className='profile__info'>
-          <h2 className='profile__name'>{userName || 'Lorem Ipsum'}</h2>
+          <h2 className='profile__name'>{currentUser.name || 'Lorem Ipsum'}</h2>
           <p className='profile__description'>
-            {userDescription || 'Dolor, Sit & Amet'}
+            {currentUser.about || 'Dolor, Sit & Amet'}
           </p>
           <button
             type='button'
@@ -104,8 +95,6 @@ function Main(props) {
           <Card
             card={c}
             key={`card-${c._id}`}
-            isLiked={c.likes.some((user) => user._id === userId)}
-            isOwner={c.owner._id === userId}
             onCardClick={props.onCardClick}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}

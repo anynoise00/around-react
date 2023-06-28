@@ -2,8 +2,9 @@
 
 Uma página interativa onde os usuários podem adicionar, remover e curtir fotos.
 
-Esse projeto está sendo criado para aplicar o que eu aprendi de React enquanto faço o bootcamp da TripleTen.
+Esse projeto é uma adaptação do site EUA Afora, que fiz anteriormente, para o React.
+E ele foi criado para aplicar o que eu aprendi de React no Bootcamp da TripleTen.
 
-Inicialmente, o projeto está só adaptando o site EUA Afora feito com HTML, CSS e Javascript normais ao React.
+Atualmente este projeto ainda está sem a validação de formulários que tinha no site original.
 
 Você pode checar o projeto neste [link](https://anynoise00.github.io/around-react_ptbr).

@@ -19,10 +19,9 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-  const [isConfirmationPopupOpen, setIsConfirmationPopupOpen] = useState(false);
-
-  const [isLoading, setIsLoading] = useState(false);
+  const [pendingDeletion, setPendingDeletion] = useState('');
   const [selectedCard, setSelectedCard] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
@@ -41,9 +40,7 @@ function App() {
   }
 
   function handleCardDelete(cardId) {
-    api.deleteCard(cardId).then((res) => {
-      setCards(cards.filter((c) => !(c._id === cardId)));
-    });
+    setPendingDeletion(cardId);
   }
 
   function handleCardLike(card) {
@@ -57,9 +54,10 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
-    setIsConfirmationPopupOpen(false);
-
+    setPendingDeletion('');
     setSelectedCard(undefined);
+
+    setIsLoading(false);
   }
 
   function handleAddPlaceSubmit(data) {
@@ -68,9 +66,8 @@ function App() {
       .addCard(data)
       .then((newCard) => {
         setCards([newCard, ...cards]);
-        closeAllPopups();
       })
-      .then(() => setIsLoading(false));
+      .finally(() => closeAllPopups());
   }
 
   function handleUpdateAvatar(avatar) {
@@ -79,9 +76,8 @@ function App() {
       .setUserAvatar(avatar)
       .then((info) => {
         setCurrentUser(info);
-        closeAllPopups();
       })
-      .then(() => setIsLoading(false));
+      .finally(() => closeAllPopups());
   }
 
   function handleUpdateUser(data) {
@@ -90,9 +86,20 @@ function App() {
       .setUserInfo(data)
       .then((info) => {
         setCurrentUser(info);
-        closeAllPopups();
       })
-      .then(() => setIsLoading(false));
+      .finally(() => closeAllPopups());
+  }
+
+  function handleDeleteConfirm(ev) {
+    ev.preventDefault();
+    setIsLoading(true);
+
+    api
+      .deleteCard(pendingDeletion)
+      .then((_) => {
+        setCards(cards.filter((c) => !(c._id === pendingDeletion)));
+      })
+      .finally(() => closeAllPopups());
   }
 
   useEffect(() => {
@@ -151,10 +158,15 @@ function App() {
 
         <PopupWithForm
           title='Tem certeza?'
-          name='confirmation'
-          isOpen={isConfirmationPopupOpen}
+          name='delete-confirm'
+          isOpen={pendingDeletion}
           onClose={closeAllPopups}
-        />
+          onSubmit={handleDeleteConfirm}
+        >
+          <button type='submit' className='form__button-submit'>
+            {isLoading ? 'Deletando...' : 'Deletar'}
+          </button>
+        </PopupWithForm>
 
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
       </CurrentUserContext.Provider>

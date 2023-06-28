@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
+import AddPlacePopup from './AddPlacaPopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import EditProfilePopup from './EditProfilePopup';
 import PopupWithForm from './PopupWithForm';
@@ -13,6 +14,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
+  const [cards, setCards] = useState([]);
 
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
@@ -22,6 +24,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(undefined);
 
   function handleAddPlaceClick() {
+    console.log('click');
     setIsAddPlacePopupOpen(true);
   }
 
@@ -37,6 +40,19 @@ function App() {
     setSelectedCard(card);
   }
 
+  function handleCardDelete(cardId) {
+    api.deleteCard(cardId).then((res) => {
+      setCards(cards.filter((c) => !(c._id === cardId)));
+    });
+  }
+
+  function handleCardLike(card) {
+    const isLiked = card.likes.some((user) => user._id === currentUser._id);
+    api.changeCardLikeStatus(card._id, !isLiked).then((newCard) => {
+      setCards(cards.map((c) => (c._id === newCard._id ? newCard : c)));
+    });
+  }
+
   function closeAllPopups() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
@@ -44,6 +60,13 @@ function App() {
     setIsConfirmationPopupOpen(false);
 
     setSelectedCard(undefined);
+  }
+
+  function handleAddPlaceSubmit(data) {
+    api.addCard(data).then((newCard) => {
+      setCards([newCard, ...cards]);
+      closeAllPopups();
+    });
   }
 
   function handleUpdateAvatar(avatar) {
@@ -62,6 +85,7 @@ function App() {
 
   useEffect(() => {
     api.getUserInfo().then((info) => setCurrentUser(info));
+    api.getInitialCards().then((cards) => setCards(cards));
   }, []);
 
   return (
@@ -69,14 +93,22 @@ function App() {
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
         <Main
+          cards={cards}
           onAddPlaceClick={handleAddPlaceClick}
           onEditAvatarClick={handleEditAvatarClick}
           onEditProfileClick={handleEditProfileClick}
           onCardClick={handleCardClick}
-          isAddPlacePopupOpen={isAddPlacePopupOpen}
+          onCardDelete={handleCardDelete}
+          onCardLike={handleCardLike}
           closeAllPopups={closeAllPopups}
         />
         <Footer />
+
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlaceSubmit={handleAddPlaceSubmit}
+        />
 
         <EditAvatarPopup
           isOpen={isEditAvatarPopupOpen}

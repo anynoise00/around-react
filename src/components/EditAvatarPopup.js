@@ -22,10 +22,11 @@ function EditAvatarPopup(props) {
       onClose={props.onClose}
       onSubmit={handleSubmit}
     >
-      <FormInputContainer name='avatar'>
+      <FormInputContainer>
         <input
-          ref={avatar}
           type='url'
+          name='avatar'
+          ref={avatar}
           className='form__field'
           placeholder='Link da imagem'
           required

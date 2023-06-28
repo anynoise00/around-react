@@ -53,7 +53,7 @@ function AddPlacePopup(props) {
       </FormInputContainer>
 
       <button type='submit' className='form__button-submit'>
-        Adicionar
+        {props.isLoading ? 'Adicionando...' : 'Adicionar'}
       </button>
     </PopupWithForm>
   );

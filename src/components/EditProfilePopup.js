@@ -63,7 +63,7 @@ function EditProfilePopup(props) {
       </FormInputContainer>
 
       <button type='submit' className='form__button-submit'>
-        Salvar
+        {props.isLoading ? 'Salvando...' : 'Salvar'}
       </button>
     </PopupWithForm>
   );

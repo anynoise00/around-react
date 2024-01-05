@@ -1,10 +1,9 @@
 # Around React
 
-Uma página interativa onde os usuários podem adicionar, remover e curtir fotos.
+Uma página interativa feita utilizando React, onde os usuários podem adicionar, remover e curtir fotos.
 
-Esse projeto é uma adaptação do site EUA Afora, que fiz anteriormente, para o React.
-E ele foi criado para aplicar o que eu aprendi de React no Bootcamp da TripleTen.
+Este projeto é uma adaptação da página EUA Afora para o React, assim como a página original, ela permite que os usuários adicionem, removam, curtam fotos e também atualizem suas informações de perfil. O objetivo de sua criação foi aplicar a utilização do React em um projeto real para torná-lo reativo. Sua conclusão levou aproximadamente um mês.
 
-Atualmente este projeto ainda está sem a validação de formulários que tinha no site original.
+Tecnologias utilizadas: React.js, JavaScript, integração com o servidor, HTML, CSS, web design adaptativo, metodologia BEM e webpack.
 
 Você pode checar o projeto neste [link](https://anynoise00.github.io/around-react_ptbr).

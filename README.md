@@ -6,4 +6,4 @@ Este projeto é uma adaptação da página EUA Afora para o React, assim como a 
 
 Tecnologias utilizadas: React.js, JavaScript, integração com o servidor, HTML, CSS, web design adaptativo, metodologia BEM e webpack.
 
-Você pode checar o projeto neste [link](https://anynoise00.github.io/around-react_ptbr).
+Você pode checar o projeto neste [link](https://anynoise00.github.io/around-react/).

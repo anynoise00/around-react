@@ -1,7 +1,7 @@
 # Around React
 
 ![Front page image](./assets/img/frontpage.png)  
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/anynoise00/around-react/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](./LICENSE)
 
 ## About
 

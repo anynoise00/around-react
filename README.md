@@ -5,7 +5,7 @@
 
 ## About
 
-A single page application where users can post photos and like photos uploaded by other users.
+A single page application where users can post photos and like photos uploaded by other users, made using React.
 
 This was a project made for TripleTen's online web development bootcamp.
 In this project I migrated the Around the US website, which was made using pure HTML, CSS and JavaScript, to React, where I practised what I was learning about front-end development using React and server integration.

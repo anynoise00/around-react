@@ -21,7 +21,6 @@ In this project I migrated the Around the US website, which was made using pure 
 The following tools where used for building this project:
 
 - [React](https://reactjs.org/)
-- [Node.js](https://nodejs.org/en/)
 - HTML, CSS & JavaScript
 - BEM methodology
 
